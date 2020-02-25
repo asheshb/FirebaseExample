@@ -31,5 +31,11 @@ class MainFragment : Fragment() {
                 MainFragmentDirections.actionMainFragmentToTextRecognitionFragment()
             )
         }
+
+        label_recognition.setOnClickListener {
+            findNavController().navigate(
+                MainFragmentDirections.actionMainFragmentToLabelImageFragment()
+            )
+        }
     }
 }

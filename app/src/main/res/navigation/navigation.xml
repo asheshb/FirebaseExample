@@ -13,10 +13,18 @@
         <action
             android:id="@+id/action_mainFragment_to_textRecognitionFragment"
             app:destination="@id/textRecognitionFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_labelImageFragment"
+            app:destination="@id/labelImageFragment" />
     </fragment>
     <fragment
         android:id="@+id/textRecognitionFragment"
         android:name="com.example.firebaseexample.TextRecognitionFragment"
         android:label="fragment_text_recognition"
         tools:layout="@layout/fragment_text_recognition" />
+    <fragment
+        android:id="@+id/labelImageFragment"
+        android:name="com.example.firebaseexample.LabelImageFragment"
+        android:label="fragment_label_image"
+        tools:layout="@layout/fragment_label_image" />
 </navigation>

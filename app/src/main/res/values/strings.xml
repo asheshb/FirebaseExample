@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Firebase Example</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="image_labels_text">Item: %1$s Confidence: %2$.2f\n</string>
+
+    <string name="photo_credit">Photo by Oleg Magni on Unsplash</string>
 </resources>

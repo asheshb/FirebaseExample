@@ -7,49 +7,60 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:context=".TextRecognitionFragment"
+        tools:context=".LabelImageFragment"
         android:padding="16dp"
         >
 
 
         <ImageView
-            android:id="@+id/text_image"
+            android:id="@+id/label_image"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="250dp"
             android:layout_marginTop="16dp"
-            android:src="@drawable/text_recognition_sample"
+            android:src="@drawable/label_image_sample"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/recognized_text"
+            android:id="@+id/recognized_labels"
             android:layout_width="0dp"
-            android:layout_height="150dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:background="#FAEFCF"
+            android:minHeight="150dp"
+            android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.937"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/recognized_text_label" />
+            app:layout_constraintTop_toBottomOf="@+id/recognized_labels_label" />
 
         <TextView
-            android:id="@+id/recognized_text_label"
+            android:id="@+id/recognized_labels_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            android:text="Recognized Text"
+            android:text="Recognized Labels"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text_image" />
+            app:layout_constraintTop_toBottomOf="@+id/label_image" />
 
         <Button
-            android:id="@+id/recognize_text"
+            android:id="@+id/recognize_labels"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Recognize text"
+            android:text="Recognize Labels"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/recognized_text" />
+            app:layout_constraintTop_toBottomOf="@+id/recognized_labels" />
+
+        <TextView
+            android:id="@+id/photo_credit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/photo_credit"
+            app:layout_constraintBottom_toTopOf="@+id/label_image"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
