@@ -43,7 +43,7 @@ class TextRecognitionFragment : Fragment() {
         val image = FirebaseVisionImage.fromBitmap(bitmap)
         val detector = FirebaseVision.getInstance().onDeviceTextRecognizer
 
-        val result = detector.processImage(image)
+        detector.processImage(image)
             .addOnSuccessListener { texts ->
                 parseRecognizedText(texts)
                 recognize_text.isEnabled = true
@@ -60,12 +60,10 @@ class TextRecognitionFragment : Fragment() {
     private fun parseRecognizedText(result: FirebaseVisionText){
         //recognize_text.text = result.text
         for (block in result.textBlocks) {
-            val blockText = block.text
-            //recognized_text.append(blockText + "\n")
+            //recognized_text.append(block.text + "\n")
 
             for (line in block.lines) {
-                val lineText = line.text
-                recognized_text.append(lineText + "\n")
+                recognized_text.append(line.text + "\n")
 
                 for (element in line.elements) {
                     val elementText = element.text
