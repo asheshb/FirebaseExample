@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.google.firebase.ml.vision.FirebaseVision
 import com.google.firebase.ml.vision.common.FirebaseVisionImage
+import com.google.firebase.ml.vision.label.FirebaseVisionCloudImageLabelerOptions
 import com.google.firebase.ml.vision.label.FirebaseVisionImageLabel
 import kotlinx.android.synthetic.main.fragment_label_image.*
 
@@ -36,12 +37,21 @@ class LabelImageFragment : Fragment() {
         }
     }
 
+
     private fun recognizeLabels(bitmap: Bitmap){
         recognize_labels.isEnabled = false
         recognized_labels.text = ""
 
         val image = FirebaseVisionImage.fromBitmap(bitmap)
-        val labeler = FirebaseVision.getInstance().getOnDeviceImageLabeler()
+//        val labeler = FirebaseVision.getInstance().getOnDeviceImageLabeler()
+
+
+        val labeler = FirebaseVision.getInstance().getCloudImageLabeler()
+
+//         val options = FirebaseVisionCloudImageLabelerOptions.Builder()
+//             .setConfidenceThreshold(0.5f)
+//             .build()
+//         val labeler = FirebaseVision.getInstance().getCloudImageLabeler(options)
 
         labeler.processImage(image)
             .addOnSuccessListener { labels ->
