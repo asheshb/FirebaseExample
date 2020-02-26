@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import com.google.firebase.ml.vision.FirebaseVision
 import com.google.firebase.ml.vision.common.FirebaseVisionImage
 import com.google.firebase.ml.vision.document.FirebaseVisionDocumentText
+import com.google.firebase.ml.vision.text.FirebaseVisionCloudTextRecognizerOptions
 import com.google.firebase.ml.vision.text.FirebaseVisionText
 import kotlinx.android.synthetic.main.fragment_text_recognition.*
 
@@ -33,29 +34,8 @@ class TextRecognitionFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         recognize_text.setOnClickListener {
-            //recognizeText((text_image.drawable as BitmapDrawable).bitmap)
-            recognizeTextOnCloud((text_image.drawable as BitmapDrawable).bitmap)
+            recognizeText((text_image.drawable as BitmapDrawable).bitmap)
         }
-    }
-
-    private fun recognizeTextOnCloud(bitmap: Bitmap){
-        recognize_text.isEnabled = false
-        recognized_text.text = ""
-
-        val image = FirebaseVisionImage.fromBitmap(bitmap)
-        val detector = FirebaseVision.getInstance().cloudDocumentTextRecognizer
-
-        detector.processImage(image)
-            .addOnSuccessListener { texts ->
-                parseRecognizedTextOnCloud(texts)
-                recognize_text.isEnabled = true
-            }
-            .addOnFailureListener { e ->
-
-                Toast.makeText(requireActivity(), "Error occurred: {${e.message}}",
-                    Toast.LENGTH_SHORT).show()
-                recognize_text.isEnabled = true
-            }
     }
 
     private fun recognizeText(bitmap: Bitmap){
@@ -63,7 +43,15 @@ class TextRecognitionFragment : Fragment() {
         recognized_text.text = ""
 
         val image = FirebaseVisionImage.fromBitmap(bitmap)
-        val detector = FirebaseVision.getInstance().onDeviceTextRecognizer
+        //val detector = FirebaseVision.getInstance().onDeviceTextRecognizer
+
+        val detector = FirebaseVision.getInstance().cloudTextRecognizer
+
+//        val options = FirebaseVisionCloudTextRecognizerOptions.Builder()
+//            .setLanguageHints(listOf("en", "hi"))
+//            .build()
+//        val detector = FirebaseVision.getInstance().getCloudTextRecognizer(options)
+
 
         detector.processImage(image)
             .addOnSuccessListener { texts ->
@@ -78,21 +66,6 @@ class TextRecognitionFragment : Fragment() {
             }
     }
 
-
-    private fun parseRecognizedTextOnCloud(result: FirebaseVisionDocumentText){
-        //recognize_text.text = result.text
-        for (block in result.blocks) {
-            recognized_text.append(block.text + "\n")
-
-            for (paragraph in block.paragraphs) {
-                recognized_text.append(paragraph.text + "\n")
-
-                for (word in paragraph.words) {
-                      val wordText=  word.text
-                }
-            }
-        }
-    }
 
     private fun parseRecognizedText(result: FirebaseVisionText){
         //recognize_text.text = result.text
