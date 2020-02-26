@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.google.firebase.ml.vision.FirebaseVision
 import com.google.firebase.ml.vision.common.FirebaseVisionImage
+import com.google.firebase.ml.vision.document.FirebaseVisionDocumentText
 import com.google.firebase.ml.vision.text.FirebaseVisionText
 import kotlinx.android.synthetic.main.fragment_text_recognition.*
 
@@ -32,8 +33,29 @@ class TextRecognitionFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         recognize_text.setOnClickListener {
-            recognizeText((text_image.drawable as BitmapDrawable).bitmap)
+            //recognizeText((text_image.drawable as BitmapDrawable).bitmap)
+            recognizeTextOnCloud((text_image.drawable as BitmapDrawable).bitmap)
         }
+    }
+
+    private fun recognizeTextOnCloud(bitmap: Bitmap){
+        recognize_text.isEnabled = false
+        recognized_text.text = ""
+
+        val image = FirebaseVisionImage.fromBitmap(bitmap)
+        val detector = FirebaseVision.getInstance().cloudDocumentTextRecognizer
+
+        detector.processImage(image)
+            .addOnSuccessListener { texts ->
+                parseRecognizedTextOnCloud(texts)
+                recognize_text.isEnabled = true
+            }
+            .addOnFailureListener { e ->
+
+                Toast.makeText(requireActivity(), "Error occurred: {${e.message}}",
+                    Toast.LENGTH_SHORT).show()
+                recognize_text.isEnabled = true
+            }
     }
 
     private fun recognizeText(bitmap: Bitmap){
@@ -43,7 +65,7 @@ class TextRecognitionFragment : Fragment() {
         val image = FirebaseVisionImage.fromBitmap(bitmap)
         val detector = FirebaseVision.getInstance().onDeviceTextRecognizer
 
-        val result = detector.processImage(image)
+        detector.processImage(image)
             .addOnSuccessListener { texts ->
                 parseRecognizedText(texts)
                 recognize_text.isEnabled = true
@@ -54,18 +76,31 @@ class TextRecognitionFragment : Fragment() {
                     Toast.LENGTH_SHORT).show()
                 recognize_text.isEnabled = true
             }
+    }
 
+
+    private fun parseRecognizedTextOnCloud(result: FirebaseVisionDocumentText){
+        //recognize_text.text = result.text
+        for (block in result.blocks) {
+            recognized_text.append(block.text + "\n")
+
+            for (paragraph in block.paragraphs) {
+                recognized_text.append(paragraph.text + "\n")
+
+                for (word in paragraph.words) {
+                      val wordText=  word.text
+                }
+            }
+        }
     }
 
     private fun parseRecognizedText(result: FirebaseVisionText){
         //recognize_text.text = result.text
         for (block in result.textBlocks) {
-            val blockText = block.text
-            //recognized_text.append(blockText + "\n")
+            recognized_text.append(block.text + "\n")
 
             for (line in block.lines) {
-                val lineText = line.text
-                recognized_text.append(lineText + "\n")
+                recognized_text.append(line.text + "\n")
 
                 for (element in line.elements) {
                     val elementText = element.text
