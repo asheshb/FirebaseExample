@@ -5,4 +5,10 @@
     <string name="image_labels_text">Item: %1$s Confidence: %2$.2f\n</string>
 
     <string name="photo_credit">Photo by Oleg Magni on Unsplash</string>
+    <string name="recognized_labels">Recognized Labels</string>
+    <string name="recognize_labels">Recognize Labels</string>
+    <string name="text_recognition">Text Recognition</string>
+    <string name="recognize_labels">Recognize Labels</string>
+    <string name="recognized_text">Recognized Text</string>
+    <string name="recognize_text">Recognize text</string>
 </resources>
