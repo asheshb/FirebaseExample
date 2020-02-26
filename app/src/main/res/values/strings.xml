@@ -8,7 +8,6 @@
     <string name="recognized_labels">Recognized Labels</string>
     <string name="recognize_labels">Recognize Labels</string>
     <string name="text_recognition">Text Recognition</string>
-    <string name="recognize_labels">Recognize Labels</string>
     <string name="recognized_text">Recognized Text</string>
     <string name="recognize_text">Recognize text</string>
 </resources>
