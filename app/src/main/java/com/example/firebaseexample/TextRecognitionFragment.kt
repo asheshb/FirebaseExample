@@ -54,7 +54,6 @@ class TextRecognitionFragment : Fragment() {
                     Toast.LENGTH_SHORT).show()
                 recognize_text.isEnabled = true
             }
-
     }
 
     private fun parseRecognizedText(result: FirebaseVisionText){
