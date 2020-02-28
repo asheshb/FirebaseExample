@@ -45,12 +45,18 @@ class TextRecognitionFragment : Fragment() {
         val image = FirebaseVisionImage.fromBitmap(bitmap)
         //val detector = FirebaseVision.getInstance().onDeviceTextRecognizer
 
+        //on-device only recognizes latin characters while cloud based recognize broad
+        // set of language and special characters
         val detector = FirebaseVision.getInstance().cloudTextRecognizer
 
 //        val options = FirebaseVisionCloudTextRecognizerOptions.Builder()
 //            .setLanguageHints(listOf("en", "hi"))
 //            .build()
 //        val detector = FirebaseVision.getInstance().getCloudTextRecognizer(options)
+
+//        //To recognize text in document images it is suggested to use cloudDocumentTextRecognizer
+//        val detector = FirebaseVision.getInstance().cloudDocumentTextRecognizer
+//        //The parsing will also be slightly different with block/paragraph/word/symbol
 
 
         detector.processImage(image)
