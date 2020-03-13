@@ -46,12 +46,12 @@ class LabelImageFragment : Fragment() {
 //        val labeler = FirebaseVision.getInstance().getOnDeviceImageLabeler()
 
 
-        val labeler = FirebaseVision.getInstance().getCloudImageLabeler()
+        //val labeler = FirebaseVision.getInstance().getCloudImageLabeler()
 
-//         val options = FirebaseVisionCloudImageLabelerOptions.Builder()
-//             .setConfidenceThreshold(0.5f)
-//             .build()
-//         val labeler = FirebaseVision.getInstance().getCloudImageLabeler(options)
+         val options = FirebaseVisionCloudImageLabelerOptions.Builder()
+             .setConfidenceThreshold(0.5f)
+             .build()
+         val labeler = FirebaseVision.getInstance().getCloudImageLabeler(options)
 
         labeler.processImage(image)
             .addOnSuccessListener { labels ->
