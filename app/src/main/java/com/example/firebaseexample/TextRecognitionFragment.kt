@@ -49,7 +49,6 @@ class TextRecognitionFragment : Fragment() {
                 recognize_text.isEnabled = true
             }
             .addOnFailureListener { e ->
-
                 Toast.makeText(requireActivity(), "Error occurred: {${e.message}}",
                     Toast.LENGTH_SHORT).show()
                 recognize_text.isEnabled = true
