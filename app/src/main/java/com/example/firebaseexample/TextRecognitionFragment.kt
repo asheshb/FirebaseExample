@@ -56,7 +56,7 @@ class TextRecognitionFragment : Fragment() {
     }
 
     private fun parseRecognizedText(result: FirebaseVisionText){
-        //recognize_text.text = result.text
+        //recognized_text.text = result.text
         for (block in result.textBlocks) {
             //recognized_text.append("${block.text}\n")
 
